@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Director - Gestión de Prácticas</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<header class="barra-superior">
+    <!-- DOCUMENTACIÓN: Renderizado dinámico del rol del Director -->
+    <h2 id="titulo-bienvenida">Panel de Control - Director</h2>
+    <a href="../index.html" onclick="localStorage.clear();" class="boton-salir">Cerrar Sesión</a>
+</header>
+
+<main class="contenedor-principal">
+    <h3>Resumen y Trazabilidad del Estado de Prácticas</h3>
+    
+    <div class="bloque-tarjetas">
+        <div class="tarjeta-indicador">
+            <h4>Estudiantes Activos</h4>
+            <p class="numero">200</p>
+            <p class="detalle">Alumnos matriculados en territorio</p>
+        </div>
+        <div class="tarjeta-indicador">
+            <h4>Convenios Vigentes</h4>
+            <p class="numero">12</p>
+            <p class="detalle">Instituciones receptoras aliadas</p>
+        </div>
+        <div class="tarjeta-indicador">
+            <h4>Bitácoras en Alerta</h4>
+            <p class="numero" style="color: #b91c1c;">3</p>
+            <p class="detalle">Reportes retrasados o con baja nota</p>
+        </div>
+    </div>
+
+    <!-- DOCUMENTACIÓN: Tabla de control de asignaciones globales y horas acumuladas -->
+    <div class="seccion-tabla">
+        <h3>Listado General de Prácticas de Licenciatura</h3>
+        <table class="tabla-datos">
+            <tr>
+                <th>Estudiante</th>
+                <th>Programa / Tipología</th>
+                <th>Institución Asignada</th>
+                <th>Horas Avaladas (De 160h)</th>
+                <th>Estado Crítico</th>
+            </tr>
+            <tr>
+                <td>Edwin Fabian Quiroga</td>
+                <td>Licenciatura en Informática (Formativa)</td>
+                <td>Colegio Custodio García Rovira</td>
+                <td>120 / 160 hrs</td>
+                <td style="color: #0f766e; font-weight: bold;">En Curso Normativo</td>
+            </tr>
+            <tr>
+                <td>Camilo Rangel Moreno</td>
+                <td>Licenciatura en Matemáticas (Profundización)</td>
+                <td>Instituto Técnico Damaso Zapata</td>
+                <td>140 / 160 hrs</td>
+                <td style="color: #0f766e; font-weight: bold;">Por Finalizar</td>
+            </tr>
+            <tr>
+                <td>Jose Gabriel Castro</td>
+                <td>Licenciatura en Informática (Observación)</td>
+                <td>Colegio Santander</td>
+                <td>45 / 160 hrs</td>
+                <td style="color: #b91c1c; font-weight: bold;">Alerta - Horas Bajas</td>
+            </tr>
+        </table>
+    </div>
+</main>
+
+<footer class="pie-pagina-institucional">
+    <img src="../images/logo1.png" alt="Logo UDI">
+</footer>
+
+<script>
+    // DOCUMENTACIÓN: Validador de seguridad de sesión cruzada
+    // Evita que un estudiante intente entrar escribiendo la URL del Director directamente
+    const usuarioActivo = localStorage.getItem('sesion_usuario');
+    const rolActivo = localStorage.getItem('sesion_rol');
+
+    if (!usuarioActivo || rolActivo !== 'director') {
+        alert("Acceso denegado: No cuenta con privilegios de Director.");
+        window.location.href = "../index.html";
+    } else {
+        document.getElementById('titulo-bienvenida').innerText = "Director Activo: " + usuarioActivo;
+    }
+</script>
+</body>
+</html>
