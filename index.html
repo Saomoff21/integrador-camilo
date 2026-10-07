@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Gestión de Prácticas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="pantalla-fondo" style="
+    background-image: linear-gradient(rgba(15, 16, 17, 0.30), rgba(15, 23, 42, 0.50)), url('images/fondo-portada1.jpg');
+    background-size: cover;
+    background-position: center;
+">
+
+    <div style="
+        width: 90%; 
+        max-width: 480px;
+        background-color: rgba(15, 23, 42, 0.60) !important; 
+        backdrop-filter: blur(12px); 
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        box-sizing: border-box;
+    ">
+
+        <img src="images/logo.png" alt="Logo UDI" class="logo-login-circular">
+
+        <h1 style="color: #ffffff !important; font-size: 26px; margin-bottom: 10px; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+            Sistema de Gestión de Prácticas
+        </h1>
+        <p style="color: #e2e8f0 !important; font-size: 14px; margin-bottom: 30px;">
+            Ingresa tus credenciales autorizadas por la institución
+        </p>
+        
+        <form id="form-login">
+            <div class="grupo-campo">
+                <label>Correo Electrónico:</label>
+                <input type="email" id="email" placeholder="ejemplo@udi.edu.co" required>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Contraseña:</label>
+                <input type="password" id="password" placeholder="Ingresa tu clave" required>
+            </div>
+
+            <div class="grupo-campo">
+                <label>Selecciona tu Rol Académico:</label>
+                <select id="rol" required>
+                    <option value="">-- Elige una opción --</option>
+                    <option value="director">Director de Programa</option>
+                    <option value="docente">Docente Asesor / Tutor Académico</option>
+                    <option value="estudiante">Estudiante de Práctica</option>
+                    <option value="coordinador">Coordinador de Práctica</option>
+                    <option value="institucion">Institución Receptora</option>
+                </select>
+            </div>
+
+            <button type="submit" class="boton-ingresar" style="width: 100%; border: none; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer;">
+                Iniciar Sesión
+            </button>
+
+            <!-- Se eliminó el enlace público al menú de evaluación académica por seguridad y realismo del negocio -->
+            <a href="#" style="display: block; text-align: center; margin-top: 15px; color: #cbd5e1 !important; text-decoration: none; font-size: 13px; opacity: 0.75;">¿Problemas para ingresar?</a>
+        </form>
+    </div>
+</div>
+
+<footer class="pie-pagina-institucional">
+    <img src="images/logo1.png" alt="Logo UDI">
+</footer>
+
+<!-- DOCUMENTACIÓN JAVASCRIPT: Sistema de Control de Autenticación y Cuentas Pre-cargadas -->
+<script>
+    // DOCUMENTACIÓN: Base de datos estática en memoria con las cuentas autorizadas por la universidad
+    // Esto resuelve el problema de cómo entrar como Director o Estudiante sin crear un botón de registro público.
+    const baseUsuarios = [
+        { email: 'director@udi.edu.co', pass: 'director123', rol: 'director' },
+        { email: 'docente@udi.edu.co', pass: 'docente123', rol: 'docente' },
+        { email: 'estudiante@udi.edu.co', pass: 'estudiante123', rol: 'estudiante' },
+        { email: 'coordinador@udi.edu.co', pass: 'coordinador123', rol: 'coordinador' },
+        { email: 'colegio@udi.edu.co', pass: 'colegio123', rol: 'institucion' }
+    ];
+
+    document.getElementById('form-login').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const emailInput = document.getElementById('email').value.trim().toLowerCase();
+        const passwordInput = document.getElementById('password').value;
+        const rolSeleccionado = document.getElementById('rol').value;
+
+        // Buscamos si el usuario y la clave coinciden con nuestra base de datos institucional
+        const usuarioValido = baseUsuarios.find(u => 
+            u.email === emailInput && 
+            u.pass === passwordInput && 
+            u.rol === rolSeleccionado
+        );
+
+        if (usuarioValido) {
+            // Si las credenciales son reales, le damos permisos en la sesión del navegador
+            localStorage.setItem('sesion_usuario', usuarioValido.email);
+            localStorage.setItem('sesion_rol', usuarioValido.rol);
+
+            // Enrutador seguro hacia las vistas del Microservicio 1 y 2
+            if (usuarioValido.role || usuarioValido.rol === "director") window.location.href = "views/dashboard.html";
+            else if (usuarioValido.rol === "docente") window.location.href = "views/docente.html";
+            else if (usuarioValido.rol === "estudiante") window.location.href = "views/estudiante.html";
+            else if (usuarioValido.rol === "coordinador") window.location.href = "views/coordinador.html";
+            else if (usuarioValido.rol === "institucion") window.location.href = "views/institucion.html";
+        } else {
+            // Si el correo o la clave están mal, bloqueamos el acceso
+            alert("Credenciales inválidas. Por favor, verifique su correo, contraseña y el rol seleccionado.");
+        }
+    });
+</script>
+</body>
+</html>

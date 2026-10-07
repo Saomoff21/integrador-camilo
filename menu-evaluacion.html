@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenidos -  Proyecto Integrador</title>
+        <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+<!-- 
+  - Usamos min-height: 100vh en el estilo directo para que el fondo cubra toda la pantalla.
+  - Asegúrate de que el nombre 'fondo-portada.jpg' sea exactamente el mismo de tu archivo descargado.
+-->
+<div class="pantalla-fondo" style="
+    background-image: linear-gradient(rgba(15, 16, 17, 0.45), rgba(15, 23, 42, 0.65)), url('images/fondo-portada.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    min-height: 100vh;
+">
+
+    <!-- 
+      - Quitamos la clase del CSS para que no interfiera el color gris viejo.
+      - Ponemos background-color oscuro premium directo con !important.
+      - Usamos height: auto !important para que la caja crezca hacia abajo y abrace todos los botones.
+    -->
+    <div style="
+        width: 90%; 
+        max-width: 480px;
+        height: auto !important;
+        background-color: rgba(15, 23, 42, 0.65) !important; 
+        backdrop-filter: blur(12px); 
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        box-sizing: border-box;
+    ">
+
+        
+        <!-- Cambiamos los títulos a color blanco para que se lean sobre la nueva tarjeta -->
+        <!-- Agregamos text-align: center directo a cada etiqueta de texto -->
+        <h1 style="color: #ffffff; margin-bottom: 5px; text-align: center;">Proyecto Integrador</h1>
+        <h2 style="color: #f1f5f9; margin-bottom: 15px; font-size: 20px; text-align: center;">Sistema de Gestión de Prácticas Pedagógicas</h2>
+        <p style="color: #cbd5e1; text-align: center;">Selecciona una de las opciones para navegar por el prototipo del sistema o revisar la actividad teórica.</p>
+        <!-- Bloque de botones para la entrega académica -->
+        <!--Bloque contenedor de botones-->
+        <!-- Agregamos align-items: center para centrar horizontalmente todos los enlaces vestidos de botón-->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 20px; width: 100%;">
+
+            
+            <!-- Botón 1: Acceso al Sistema Real (Login) -->
+            <a href="index.html" class="boton-ingresar" style="text-align: center; text-decoration: none;width: 100%; box-sizing: border-box;">
+                🚪 Ir al Inicio de Sesión (Login)
+            </a>
+
+            <!-- Línea divisoria decorativa -->
+            <hr style="border: 0; border-top: 1px solid #cbd5e1; margin: 10px 0;">
+            
+            <p style="margin: 0; font-weight: bold; color: #64748b; font-size: 13px;">PROTOTIPOS DE INTERFAZ POR ROL:</p>
+
+            <!-- Botón 3: Vista del Director (Ya hecha) -->
+            <a href="views/dashboard.html" class="boton-ingresar" style="text-align: center; text-decoration: none;width: 100%; box-sizing: border-box; background-color: #1e3a8a;">
+                👤 Vista: Director de Programa
+            </a>
+
+            <!-- Botón 4: Vista del Docente Asesor (Pendiente por crear) -->
+            <a href="views/docente.html" class="boton-ingresar" style="text-align: center; text-decoration: none;width: 100%; box-sizing: border-box; background-color: #475569;">
+                👥 Vista: Docente Asesor
+            </a>
+
+            <!-- Botón 5: Vista del Estudiante (Pendiente por crear) -->
+            <a href="views/estudiante.html" class="boton-ingresar" style="text-align: center; text-decoration: none;width: 100%; box-sizing: border-box; background-color: #475569;">
+                🎓 Vista: Estudiante de Práctica
+            </a>
+            <!-- Botón 6: Vista del Coordinador de Práctica (Nuevo) -->
+            <a href="views/coordinador.html" class="boton-ingresar" style="text-align: center; text-decoration: none; width: 100%; box-sizing: border-box; background-color: #475569;">
+                👥 Vista: Coordinador de Práctica
+            </a>
+
+            <!-- Botón 7: Vista de la Institución Receptora (Nuevo) -->
+            <a href="views/institucion.html" class="boton-ingresar" style="text-align: center; text-decoration: none; width: 100%; box-sizing: border-box; background-color: #475569;">
+                🏫 Vista: Institución Receptora
+            </a>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
